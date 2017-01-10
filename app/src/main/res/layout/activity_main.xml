@@ -1,17 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cn.ucai.fulicenter.controller.Activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/layout_NewGoods"
+            style="@style/menu_item_style"
+            android:drawableTop="@drawable/selector_menu_item_new_good"
+            android:text="新品"
+            android:button="@null"
+            android:textColor="@color/main_botton_text_color"
+            android:checked="false"/>
+
+
+            <RadioButton
+            android:id="@+id/layout_Boutique"
+            style="@style/menu_item_style"
+            android:drawableTop="@drawable/selector_menu_item_boutique"
+            android:text="精选"
+            android:button="@null"
+            android:textColor="@color/main_botton_text_color"
+            android:checked="false"/>
+
+        <RadioButton
+            android:id="@+id/layout_Category"
+            style="@style/menu_item_style"
+            android:drawableTop="@drawable/selector_menu_item_category"
+            android:text="分类"
+            android:button="@null"
+            android:textColor="@color/main_botton_text_color"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/layout_Cart"
+            style="@style/menu_item_style"
+            android:drawableTop="@drawable/selector_menu_item_cart"
+            android:text="购物车"
+            android:button="@null"
+            android:textColor="@color/main_botton_text_color"
+            android:checked="false"/>
+
+        <RadioButton
+            android:id="@+id/layout_Personal"
+            style="@style/menu_item_style"
+            android:drawableTop="@drawable/selector_menu_item_personal_center"
+            android:text="个人中心"
+            android:button="@null"
+            android:textColor="@color/main_botton_text_color"
+            android:checked="false"/>
+    </LinearLayout>
+
 </RelativeLayout>
+
+
