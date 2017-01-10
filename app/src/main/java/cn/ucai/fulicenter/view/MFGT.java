@@ -11,13 +11,13 @@ import cn.ucai.fulicenter.controller.Activity.SplashActivity;
  */
 
 public class MFGT {
-    public static void startActivity(Activity context, Class<?> clz) {
-        context.startActivity(new Intent(context, clz));
-        context.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+    public static void startActivity(Activity activity, Class<?> clz) {
+        activity.startActivity(new Intent(activity, clz));
+        activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
-    public static void finish(Activity context) {
-        context.finish();
-        context.overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
+    public static void finishActivity(Activity activity) {
+        activity.finish();
+        activity.overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
     }
 }
