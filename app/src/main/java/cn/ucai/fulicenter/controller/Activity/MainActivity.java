@@ -5,31 +5,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 
 public class MainActivity extends AppCompatActivity {
     int index, currentIndex;
-    RadioButton rbNewGoods,rbBoutique,rbCategory,rbCart, rbPersonal;
     RadioButton[] rbs = new RadioButton[5];
+    @BindView(R.id.layout_NewGoods)
+    RadioButton mlayoutNewGoods;
+    @BindView(R.id.layout_Boutique)
+    RadioButton mlayoutBoutique;
+    @BindView(R.id.layout_Category)
+    RadioButton mlayoutCategory;
+    @BindView(R.id.layout_Cart)
+    RadioButton mlayoutCart;
+    @BindView(R.id.layout_Personal)
+    RadioButton mlayoutPersonal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-        rbs[0] = rbNewGoods;
-        rbs[1] = rbBoutique;
-        rbs[2] = rbCategory;
-        rbs[3] = rbCart;
-        rbs[4] = rbPersonal;
-    }
-
-    private void initView() {
-        rbNewGoods = (RadioButton) findViewById(R.id.layout_NewGoods);
-        rbBoutique = (RadioButton) findViewById(R.id.layout_Boutique);
-        rbCategory = (RadioButton) findViewById(R.id.layout_Category);
-        rbCart = (RadioButton) findViewById(R.id.layout_Cart);
-        rbPersonal = (RadioButton) findViewById(R.id.layout_Personal);
+        ButterKnife.bind(this);
+        rbs[0] = mlayoutNewGoods;
+        rbs[1] = mlayoutBoutique;
+        rbs[2] = mlayoutCategory;
+        rbs[3] = mlayoutCart;
+        rbs[4] = mlayoutPersonal;
     }
 
     public void onCheckedChange(View view) {
@@ -54,12 +57,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setRadioStatus() {
-        for (int i=0;i<rbs.length;i++) {
+        for (int i = 0; i < rbs.length; i++) {
             if (index != i) {
                 rbs[i].setChecked(false);
             } else {
                 rbs[i].setChecked(true);
             }
         }
+        currentIndex = index;
     }
 }
