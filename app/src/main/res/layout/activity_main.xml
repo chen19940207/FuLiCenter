@@ -13,49 +13,63 @@
         <RadioButton
             android:id="@+id/layout_NewGoods"
             style="@style/menu_item_style"
+            android:button="@null"
+            android:checked="false"
             android:drawableTop="@drawable/selector_menu_item_new_good"
             android:text="新品"
-            android:button="@null"
-            android:textColor="@color/main_botton_text_color"
-            android:checked="false"/>
+            android:textColor="@color/main_botton_text_color" />
 
 
-            <RadioButton
+        <RadioButton
             android:id="@+id/layout_Boutique"
             style="@style/menu_item_style"
+            android:button="@null"
+            android:checked="false"
             android:drawableTop="@drawable/selector_menu_item_boutique"
             android:text="精选"
-            android:button="@null"
-            android:textColor="@color/main_botton_text_color"
-            android:checked="false"/>
+            android:textColor="@color/main_botton_text_color" />
 
         <RadioButton
             android:id="@+id/layout_Category"
             style="@style/menu_item_style"
+            android:button="@null"
+            android:checked="true"
             android:drawableTop="@drawable/selector_menu_item_category"
             android:text="分类"
-            android:button="@null"
-            android:textColor="@color/main_botton_text_color"
-            android:checked="true"/>
+            android:textColor="@color/main_botton_text_color" />
 
         <RadioButton
             android:id="@+id/layout_Cart"
             style="@style/menu_item_style"
+            android:button="@null"
+            android:checked="false"
             android:drawableTop="@drawable/selector_menu_item_cart"
             android:text="购物车"
-            android:button="@null"
-            android:textColor="@color/main_botton_text_color"
-            android:checked="false"/>
+            android:textColor="@color/main_botton_text_color" />
 
         <RadioButton
             android:id="@+id/layout_Personal"
             style="@style/menu_item_style"
+            android:button="@null"
+            android:checked="false"
             android:drawableTop="@drawable/selector_menu_item_personal_center"
             android:text="个人中心"
-            android:button="@null"
-            android:textColor="@color/main_botton_text_color"
-            android:checked="false"/>
+            android:textColor="@color/main_botton_text_color" />
     </LinearLayout>
+    <View
+        android:id="@+id/vline"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@id/main_button"
+        android:background="#D6DCDC" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/vline"
+        android:layout_marginBottom="1dp">
+    </FrameLayout>
 
 </RelativeLayout>
 
