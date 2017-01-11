@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
+import cn.ucai.fulicenter.view.FooterViewHolder;
 
 import static cn.ucai.fulicenter.application.I.TYPE_FOOTER;
 import static cn.ucai.fulicenter.application.I.TYPE_ITEM;
@@ -82,13 +83,15 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_FOOTER) {
             FooterViewHolder holder1 = (FooterViewHolder) holder;
-            holder1.mtvFooter.setText(getFooter());
+            holder1.setFooterString(mContext.getString(getFooterString()));
             return;
+        } else {
+
+            GoodsViewHolder gvh = (GoodsViewHolder) holder;
+            ImageLoader.downloadImg(mContext, gvh.mivGoodsThumb, mList.get(position).getGoodsThumb());
+            gvh.mtvGoodsName.setText(mList.get(position).getGoodsName());
+            gvh.mtvGoodsPrice.setText(mList.get(position).getCurrencyPrice());
         }
-        GoodsViewHolder gvh = (GoodsViewHolder) holder;
-        ImageLoader.downloadImg(mContext, gvh.mivGoodsThumb, mList.get(position).getGoodsThumb());
-        gvh.mtvGoodsName.setText(mList.get(position).getGoodsName());
-        gvh.mtvGoodsPrice.setText(mList.get(position).getCurrencyPrice());
     }
 
     @Override
@@ -117,6 +120,9 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public int getFooterString() {
+        return isMore ? R.string.load_more : R.string.no_more;
+    }
     static class GoodsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivGoodsThumb)
         ImageView mivGoodsThumb;
@@ -133,13 +139,4 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    static class FooterViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.tvFooter)
-        TextView mtvFooter;
-
-        FooterViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
 }

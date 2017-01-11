@@ -14,7 +14,7 @@
             android:id="@+id/layout_NewGoods"
             style="@style/menu_item_style"
             android:button="@null"
-            android:checked="false"
+            android:checked="true"
             android:drawableTop="@drawable/selector_menu_item_new_good"
             android:text="新品"
             android:textColor="@color/main_botton_text_color" />
@@ -33,7 +33,7 @@
             android:id="@+id/layout_Category"
             style="@style/menu_item_style"
             android:button="@null"
-            android:checked="true"
+            android:checked="false"
             android:drawableTop="@drawable/selector_menu_item_category"
             android:text="分类"
             android:textColor="@color/main_botton_text_color" />
