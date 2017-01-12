@@ -13,6 +13,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
+import cn.ucai.fulicenter.view.MFGT;
 
 public class BoutiqueActivity extends AppCompatActivity {
 
@@ -26,13 +27,13 @@ public class BoutiqueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boutique);
         ButterKnife.bind(this);
-        textBo.setText(getIntent().getStringExtra(I.CategoryGood.GOODS_NAME));
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, new NewGoodsFragment())
                 .commit();
+        textBo.setText(getIntent().getStringExtra(I.Boutique.NAME));
     }
 
     public void onCheckedChange(View view) {
-        BoutiqueActivity.this.finish();
+        MFGT.finishActivity(this);
     }
 }
