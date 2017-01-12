@@ -3,6 +3,7 @@
     package="cn.ucai.fulicenter">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".application.FuLiCenterApplication"
         android:allowBackup="true"
@@ -10,8 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.Activity.MainActivity">
-        </activity>
+        <activity android:name=".controller.Activity.MainActivity"></activity>
         <activity android:name=".controller.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controller.Activity.BoutiqueActivity"></activity>
     </application>
 
 </manifest>

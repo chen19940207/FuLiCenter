@@ -76,8 +76,7 @@ public class BoutiqueFragment extends Fragment {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastPosition == mAdapter.getItemCount() - 1
                         && mAdapter.isMore()) {
-                    pageId++;
-                    initData(I.ACTION_PULL_UP);
+                  //  initData(I.ACTION_PULL_UP);
                 }
             }
 

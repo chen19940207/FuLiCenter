@@ -98,7 +98,8 @@ public class NewGoodsFragment extends Fragment {
     }
 
     private void initData(final int action) {
-        model.downData(getContext(), I.CAT_ID, pageId, new OnCompleteListener<NewGoodsBean[]>() {
+        int catId = getActivity().getIntent().getIntExtra(I.NewAndBoutiqueGoods.CAT_ID, I.CAT_ID);
+        model.downData(getContext(),catId, pageId, new OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
                 msrl.setRefreshing(false);

@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
+import cn.ucai.fulicenter.controller.Activity.BoutiqueActivity;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 import cn.ucai.fulicenter.view.FooterViewHolder;
@@ -63,7 +65,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (getItemViewType(position) == TYPE_FOOTER) {
             FooterViewHolder holder1 = (FooterViewHolder) holder;
             holder1.setFooterString(mContext.getString(getFooterString()));
@@ -73,6 +75,16 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
             gvh.mtvBoutiqueName.setText(mList.get(position).getName());
             gvh.mtvBoutiqueTitle.setText(mList.get(position).getTitle());
             gvh.mtvBoutiqueDescription.setText(mList.get(position).getDescription());
+            gvh.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(new Intent(mContext, BoutiqueActivity.class)
+                            .putExtra(I.NewAndBoutiqueGoods.CAT_ID, mList.get(position).getId())
+                            .putExtra(I.CategoryGood.GOODS_NAME,mList.get(position).getName()));
+
+
+                }
+            });
         }
     }
 
