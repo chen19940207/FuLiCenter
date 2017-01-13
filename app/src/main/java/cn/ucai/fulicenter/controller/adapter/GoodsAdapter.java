@@ -19,6 +19,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
+import cn.ucai.fulicenter.model.utils.L;
 import cn.ucai.fulicenter.view.FooterViewHolder;
 import cn.ucai.fulicenter.view.MFGT;
 
@@ -133,27 +134,38 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         return isMore ? R.string.load_more : R.string.no_more;
     }
 
-    private void SortGoods(final int sortBy) {
+    public void SortGoods(final int sortBy) {
+        L.e("main","丢你螺母3");
         Collections.sort(mList, new Comparator<NewGoodsBean>() {
             @Override
             public int compare(NewGoodsBean leftBeam, NewGoodsBean rightBean) {
                 int result = 0;
                 switch (sortBy) {
                     case I.SORT_BY_ADDTIME_ASC:
-                   //     result =( int)(leftBeam.getAddTime() - rightBean.getAddTime())
+                        result = (int) (leftBeam.getAddTime() - rightBean.getAddTime());
                         break;
                     case I.SORT_BY_ADDTIME_DESC:
+                        result = (int) (rightBean.getAddTime() - leftBeam.getAddTime());
                         break;
                     case I.SORT_BY_PRICE_ASC:
+                        result = getPrice(leftBeam.getCurrencyPrice())- getPrice(rightBean.getCurrencyPrice());
                         break;
                     case I.SORT_BY_PRICE_DESC:
+                        result = getPrice(rightBean.getCurrencyPrice())- getPrice(leftBeam.getCurrencyPrice());
                         break;
-
                 }
-                return 0;
+                return result;
             }
         });
+        notifyDataSetChanged();
     }
+    int getPrice(String price) {
+        int p = 0;
+        p = Integer.valueOf(price.substring(price.indexOf("￥")+1));
+        L.e("adpter", "p=" + p);
+        return p;
+    }
+
 
     static class GoodsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivGoodsThumb)

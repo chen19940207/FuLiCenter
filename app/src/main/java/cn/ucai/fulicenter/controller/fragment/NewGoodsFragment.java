@@ -85,6 +85,10 @@ public class NewGoodsFragment extends Fragment {
         });
     }
 
+    public void sortGoods(int sortBy) {
+        mAdapter.SortGoods(sortBy);
+    }
+
     private void setPullDownListener() {
         msrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

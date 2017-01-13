@@ -103,6 +103,7 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
         }
         ImageLoader.downloadImg(mContext, cvh.mivCategoryChildThumb, mChildList.get(groupPosition).get(childPosition).getImageUrl());
         cvh.mtvCategoryChildName.setText(mChildList.get(groupPosition).get(childPosition).getName());
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
