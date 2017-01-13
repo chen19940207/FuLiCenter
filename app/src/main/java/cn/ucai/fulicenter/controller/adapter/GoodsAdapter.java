@@ -10,10 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 import cn.ucai.fulicenter.view.FooterViewHolder;
@@ -129,6 +132,29 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     public int getFooterString() {
         return isMore ? R.string.load_more : R.string.no_more;
     }
+
+    private void SortGoods(final int sortBy) {
+        Collections.sort(mList, new Comparator<NewGoodsBean>() {
+            @Override
+            public int compare(NewGoodsBean leftBeam, NewGoodsBean rightBean) {
+                int result = 0;
+                switch (sortBy) {
+                    case I.SORT_BY_ADDTIME_ASC:
+                   //     result =( int)(leftBeam.getAddTime() - rightBean.getAddTime())
+                        break;
+                    case I.SORT_BY_ADDTIME_DESC:
+                        break;
+                    case I.SORT_BY_PRICE_ASC:
+                        break;
+                    case I.SORT_BY_PRICE_DESC:
+                        break;
+
+                }
+                return 0;
+            }
+        });
+    }
+
     static class GoodsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivGoodsThumb)
         ImageView mivGoodsThumb;
