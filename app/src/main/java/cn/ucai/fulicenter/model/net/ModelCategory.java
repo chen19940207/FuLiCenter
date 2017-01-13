@@ -13,7 +13,7 @@ import cn.ucai.fulicenter.model.utils.OkHttpUtils;
 
 public class ModelCategory implements IModelCategory {
     @Override
-    public void downDat(Context context, OnCompleteListener<CategoryGroupBean[]> listener) {
+    public void downData(Context context, OnCompleteListener<CategoryGroupBean[]> listener) {
         OkHttpUtils<CategoryGroupBean[]> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_CATEGORY_GROUP)
                 .targetClass(CategoryGroupBean[].class)
@@ -22,7 +22,7 @@ public class ModelCategory implements IModelCategory {
     }
 
     @Override
-    public void downDat(Context context, int parentId, OnCompleteListener<CategoryChildBean[]> listener) {
+    public void downData(Context context, int parentId, OnCompleteListener<CategoryChildBean[]> listener) {
         OkHttpUtils<CategoryChildBean[]> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_CATEGORY_CHILDREN)
                 .addParam(I.CategoryChild.PARENT_ID, String.valueOf(parentId))

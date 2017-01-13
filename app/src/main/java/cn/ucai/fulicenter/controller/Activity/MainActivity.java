@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
+import cn.ucai.fulicenter.controller.fragment.CategoryFragment;
 
 public class MainActivity extends AppCompatActivity {
     int index, currentIndex;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment[] mFragment = new Fragment[5];
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
+    CategoryFragment mCategoryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
+        mCategoryFragment = new CategoryFragment();
         mFragment[0] = mNewGoodsFragment;
         mFragment[1] = mBoutiqueFragment;
+        mFragment[2] = mCategoryFragment;
+
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mNewGoodsFragment)
                 .add(R.id.fragment_container, mBoutiqueFragment)
+                .add(R.id.fragment_container, mCategoryFragment)
                 .show(mNewGoodsFragment)
                 .hide(mBoutiqueFragment)
+                .hide(mCategoryFragment)
                 .commit();
     }
 
@@ -73,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if (index != currentIndex) {
             setFragment();
-        }
-        if (index != currentIndex) {
             setRadioStatus();
         }
     }
