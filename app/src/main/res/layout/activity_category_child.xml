@@ -17,22 +17,16 @@
             android:onClick="onCheckedChange"
             android:src="@drawable/back" />
 
-        <TextView
-            android:id="@+id/textBo"
+        <cn.ucai.fulicenter.view.CatFilterButton
+            android:id="@+id/CatFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="随便打几个字吧"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/bousdf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_toRightOf="@id/textBo"
-            android:onClick="onCheckedChange"
-            android:src="@drawable/arrow2_up" />
+            android:background="@null"
+            android:text="分类"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/arrow2_up"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
     <LinearLayout

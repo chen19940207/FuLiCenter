@@ -135,7 +135,6 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     }
 
     public void SortGoods(final int sortBy) {
-        L.e("main","丢你螺母3");
         Collections.sort(mList, new Comparator<NewGoodsBean>() {
             @Override
             public int compare(NewGoodsBean leftBeam, NewGoodsBean rightBean) {
