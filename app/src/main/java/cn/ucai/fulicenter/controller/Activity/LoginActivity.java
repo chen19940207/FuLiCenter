@@ -117,8 +117,9 @@ public class LoginActivity extends AppCompatActivity {
                             if (savaUser) {
                                 SharePrefrenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
                                 FuLiCenterApplication.setUser(user);
+                                setResult(RESULT_OK);
+                                MFGT.finishActivity(LoginActivity.this);
                             }
-                            MFGT.finishActivity(LoginActivity.this);
                         } else {
                             if (result.getRetCode() == I.MSG_LOGIN_UNKNOW_USER) {
                                 CommonUtils.showLongToast(getString(R.string.login_fail_unknow_user));
