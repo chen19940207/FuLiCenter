@@ -60,7 +60,7 @@ public class User {
     }
 
     public String getMavatarSuffix() {
-        return mavatarSuffix!=null?mavatarSuffix: I.AVATAR_SUFFIX_JPG;
+        return mavatarSuffix != null ? mavatarSuffix : I.AVATAR_SUFFIX_JPG;
     }
 
     public void setMavatarSuffix(String mavatarSuffix) {
@@ -115,5 +115,12 @@ public class User {
                 '}';
     }
 
-
+    public String getAvatarPath() {
+        String path = "http://101.251.196.90.:8000/FuLiCenterServerV2.0/downloadAvatar?name_or_hxid="
+                + this.getMuserName()
+                + "&avatarType=user_avatar&m_avatar_suffix="
+                + this.getMavatarSuffix()
+                + "&width=200&height=200";
+        return path;
+    }
 }
