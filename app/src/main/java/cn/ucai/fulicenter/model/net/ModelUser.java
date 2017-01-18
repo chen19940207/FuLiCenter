@@ -24,13 +24,23 @@ public class ModelUser implements IModeUser {
     }
 
     @Override
-    public void register(Context context, String username, String nick, String password, OkHttpUtils.OnCompleteListener<String> listener) {
+    public void register(Context context, String username, String nick, String password,OnCompleteListener<String> listener) {
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_REGISTER)
                 .addParam(I.User.USER_NAME, username)
                 .addParam(I.User.NICK,nick)
                 .addParam(I.User.PASSWORD, MD5.getMessageDigest(password))
                 .post()
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
+    @Override
+    public void updateNick(Context context, String username, String nick,OnCompleteListener<String> listener) {
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_UPDATE_USER_NICK)
+                .addParam(I.User.USER_NAME, username)
+                .addParam(I.User.NICK,nick)
                 .targetClass(String.class)
                 .execute(listener);
     }

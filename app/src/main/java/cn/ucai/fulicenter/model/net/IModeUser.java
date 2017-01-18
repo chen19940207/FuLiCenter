@@ -11,5 +11,6 @@ import cn.ucai.fulicenter.model.utils.OkHttpUtils;
 
 public interface IModeUser {
     void login(Context context,String username,String password, OnCompleteListener<String> listener);
-    void register(Context context, String username, String nick, String password, OkHttpUtils.OnCompleteListener<String> listener);
+    void register(Context context, String username, String nick, String password,OnCompleteListener<String> listener);
+    void updateNick(Context context, String username, String userNick, OnCompleteListener<String> listener);
 }

@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -67,8 +70,17 @@ public class PersonalFragment extends Fragment {
 
         View layout = inflater.inflate(R.layout.fragment_personal, container, false);
         ButterKnife.bind(this, layout);
+        initOrderList();
         initData();
         return layout;
+    }
+
+    private void initOrderList() {
+        ArrayList<HashMap<String, Object>> data = new ArrayList<>();
+        HashMap<String, Object> oreder1 = new HashMap<String, Object>();
+        oreder1.put("order", R.drawable.order_list1);
+        data.add(oreder1);
+
     }
 
     private void initData() {
@@ -78,6 +90,12 @@ public class PersonalFragment extends Fragment {
         } else {
             MFGT.gotoLogin(getActivity());
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void loadUserInfo(User user) {
