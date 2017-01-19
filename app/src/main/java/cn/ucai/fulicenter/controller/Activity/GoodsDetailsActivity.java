@@ -218,7 +218,6 @@ public class GoodsDetailsActivity extends AppCompatActivity {
                 if (result != null && result.isSuccess()) {
                   //  FuLiCenterApplication.getMyCartList().put(goodsId, null);
                     CommonUtils.showLongToast(R.string.add_goods_success);
-
                 }
             }
 

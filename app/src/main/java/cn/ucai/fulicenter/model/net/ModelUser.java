@@ -128,14 +128,13 @@ public class ModelUser implements IModeUser {
 
     @Override
     public void updateCart(Context context, int action, String username, int goodsId, int count, int cartId, OnCompleteListener<MessageBean> listener) {
-        if (FuLiCenterApplication.getMyCartList().containsKey(goodsId)) {
-            if (action == I.ACTION_CART_DEL) {
+            if (action == I.ACTION_CART_ADD) {
+                addCart(context, username, goodsId, 1, listener);
+            } else if (action == I.ACTION_CART_DEL) {
                 delCart(context, cartId, listener);
             } else {
                 updateCart(context, cartId, count, listener);
             }
-        } else {
-            addCart(context, username, goodsId, 1, listener);
         }
     }
-}
+

@@ -31,12 +31,13 @@ public class FuLiCenterApplication extends Application {
     }
 
     private static User user;
-    private static HashMap<Integer, CartBean> MyCartList = new HashMap<>();
-
-    public static HashMap<Integer, CartBean> getMyCartList() {
-        return MyCartList;
-    }
-
+//    private static HashMap<Integer, CartBean> MyCartList = new HashMap<>();
+//    public static HashMap<Integer, CartBean> getMyCartList() {
+//        return MyCartList;
+//    }
+//    public static void setMyCartList(HashMap<Integer, CartBean> myCartList) {
+//        FuLiCenterApplication.MyCartList = MyCartList;
+//    }
 
     public static User getUser() {
         return user;
