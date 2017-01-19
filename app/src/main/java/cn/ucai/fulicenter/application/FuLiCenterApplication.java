@@ -20,6 +20,9 @@ public class FuLiCenterApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (instance == null) {
+            instance=new FuLiCenterApplication();
+        }
         instance = this;
     }
 

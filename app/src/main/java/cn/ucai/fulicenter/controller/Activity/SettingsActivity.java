@@ -48,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
-        DisplayUtils.initBackWithTitle(this, "设置");
+        DisplayUtils.initBackWithTitle(this, "个人资料");
         initData();
     }
 

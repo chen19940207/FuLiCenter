@@ -10,7 +10,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -66,18 +65,18 @@ public class PersonalFragment extends Fragment {
 
 
     IModeUser model;
+
     public PersonalFragment() {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View layout = inflater.inflate(R.layout.fragment_personal, container, false);
         ButterKnife.bind(this, layout);
-     //   initOrderList();
+        //   initOrderList();
         initData();
         return layout;
     }
@@ -99,7 +98,7 @@ public class PersonalFragment extends Fragment {
         HashMap<String, Object> oreder5 = new HashMap<String, Object>();
         oreder5.put("order", R.drawable.order_list1);
         data.add(oreder5);
-      //  SimpleAdapter adapter=new SimpleAdapter(getContext(),data,R.layout.)
+        //  SimpleAdapter adapter=new SimpleAdapter(getContext(),data,R.layout.)
     }
 
     private void initData() {
@@ -108,7 +107,7 @@ public class PersonalFragment extends Fragment {
             loadUserInfo(user);
             getCollectCount();
         } else {
-        //    MFGT.gotoLogin(getActivity());
+            //    MFGT.gotoLogin(getActivity());
         }
     }
 
@@ -119,8 +118,8 @@ public class PersonalFragment extends Fragment {
     }
 
     private void loadUserInfo(User user) {
-      //  ImageLoader.downloadImg(getContext(), ivUserAvatar, user.getAvatarPath());
-        ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user),getContext(),ivUserAvatar);
+        //  ImageLoader.downloadImg(getContext(), ivUserAvatar, user.getAvatarPath());
+        ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user), getContext(), ivUserAvatar);
         tvUserName.setText(user.getMuserNick());
         loadCollectCount("0");
     }
@@ -144,6 +143,7 @@ public class PersonalFragment extends Fragment {
                     }
                 });
     }
+
     private void loadCollectCount(String count) {
         tvCollectCount.setText(String.valueOf(count));
 
@@ -156,4 +156,8 @@ public class PersonalFragment extends Fragment {
     }
 
 
+    @OnClick(R.id.layout_center_collect)
+    public void collects() {
+        MFGT.gotoCollects(getActivity());
+    }
 }

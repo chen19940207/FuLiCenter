@@ -30,7 +30,6 @@ public class DBManager {
     public synchronized static DBManager getInstance() {
         if (dbHelper == null) {
             L.e(TAG, "没有调用onInit()");
-
         }
         return dbMgr;
     }
