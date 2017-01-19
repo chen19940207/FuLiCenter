@@ -14,6 +14,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.BoutiqueFragment;
+import cn.ucai.fulicenter.controller.fragment.CartFragment;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
 import cn.ucai.fulicenter.controller.fragment.CategoryFragment;
 import cn.ucai.fulicenter.controller.fragment.PersonalFragment;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     BoutiqueFragment mBoutiqueFragment;
     CategoryFragment mCategoryFragment;
     PersonalFragment mPersonalFragment;
+    CartFragment mCartFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
         mBoutiqueFragment = new BoutiqueFragment();
         mCategoryFragment = new CategoryFragment();
         mPersonalFragment = new PersonalFragment();
+        mCartFragment = new CartFragment();
         mFragment[0] = mNewGoodsFragment;
         mFragment[1] = mBoutiqueFragment;
         mFragment[2] = mCategoryFragment;
+        mFragment[3] = mCartFragment;
         mFragment[4] = mPersonalFragment;
 
         getSupportFragmentManager().beginTransaction()
@@ -64,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragment_container, mBoutiqueFragment)
                 .add(R.id.fragment_container, mCategoryFragment)
                 .add(R.id.fragment_container, mPersonalFragment)
+                .add(R.id.fragment_container, mCartFragment)
                 .show(mNewGoodsFragment)
                 .hide(mBoutiqueFragment)
                 .hide(mCategoryFragment)
                 .hide(mPersonalFragment)
+                .hide(mCartFragment)
                 .commit();
 
     }
@@ -84,7 +90,11 @@ public class MainActivity extends AppCompatActivity {
                 index = 2;
                 break;
             case R.id.layout_Cart:
-                index = 3;
+                if (FuLiCenterApplication.getUser() == null) {
+                    MFGT.gotoLogin(this);
+                } else {
+                    index = 3;
+                }
                 break;
             case R.id.layout_Personal:
                 if (FuLiCenterApplication.getUser() == null) {
