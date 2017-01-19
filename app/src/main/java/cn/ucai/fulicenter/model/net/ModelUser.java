@@ -4,7 +4,9 @@ import android.content.Context;
 
 import java.io.File;
 
+import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.application.I;
+import cn.ucai.fulicenter.model.bean.CartBean;
 import cn.ucai.fulicenter.model.bean.CollectBean;
 import cn.ucai.fulicenter.model.bean.MessageBean;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
@@ -29,11 +31,11 @@ public class ModelUser implements IModeUser {
     }
 
     @Override
-    public void register(Context context, String username, String nick, String password,OnCompleteListener<String> listener) {
+    public void register(Context context, String username, String nick, String password, OnCompleteListener<String> listener) {
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_REGISTER)
                 .addParam(I.User.USER_NAME, username)
-                .addParam(I.User.NICK,nick)
+                .addParam(I.User.NICK, nick)
                 .addParam(I.User.PASSWORD, MD5.getMessageDigest(password))
                 .post()
                 .targetClass(String.class)
@@ -41,11 +43,11 @@ public class ModelUser implements IModeUser {
     }
 
     @Override
-    public void updateNick(Context context, String username, String nick,OnCompleteListener<String> listener) {
+    public void updateNick(Context context, String username, String nick, OnCompleteListener<String> listener) {
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_UPDATE_USER_NICK)
                 .addParam(I.User.USER_NAME, username)
-                .addParam(I.User.NICK,nick)
+                .addParam(I.User.NICK, nick)
                 .targetClass(String.class)
                 .execute(listener);
     }
@@ -63,7 +65,7 @@ public class ModelUser implements IModeUser {
     }
 
     @Override
-    public void collectCount(Context context,String username, OnCompleteListener<MessageBean> listener) {
+    public void collectCount(Context context, String username, OnCompleteListener<MessageBean> listener) {
         OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_COLLECT_COUNT)
                 .addParam(I.Collect.USER_NAME, username)
@@ -80,5 +82,60 @@ public class ModelUser implements IModeUser {
                 .addParam(I.PAGE_SIZE, String.valueOf(pageSize))
                 .targetClass(CollectBean[].class)
                 .execute(listener);
+    }
+
+    @Override
+    public void getCart(Context context, String username, OnCompleteListener<CartBean[]> listener) {
+        OkHttpUtils<CartBean[]> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_CARTS)
+                .addParam(I.Cart.USER_NAME, username)
+                .targetClass(CartBean[].class)
+                .execute(listener);
+    }
+
+
+    private void addCart(Context context, String username, int goodsId, int count, OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_ADD_CART)
+                .addParam(I.Cart.USER_NAME, username)
+                .addParam(I.Cart.GOODS_ID, String.valueOf(goodsId))
+                .addParam(I.Cart.COUNT, String.valueOf(count))
+                .addParam(I.Cart.IS_CHECKED, String.valueOf(false))
+                .targetClass(MessageBean.class)
+                .execute(listener);
+    }
+
+
+    private void delCart(Context context, int cartId, OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_DELETE_CART)
+                .addParam(I.Cart.GOODS_ID, String.valueOf(cartId))
+                .targetClass(MessageBean.class)
+                .execute(listener);
+
+    }
+
+
+    private void updateCart(Context context, int cartId, int count, OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_UPDATE_CART)
+                .addParam(I.Cart.ID, String.valueOf(cartId))
+                .addParam(I.Cart.COUNT, String.valueOf(count))
+                .addParam(I.Cart.IS_CHECKED, String.valueOf(false))
+                .targetClass(MessageBean.class)
+                .execute(listener);
+    }
+
+    @Override
+    public void updateCart(Context context, int action, String username, int goodsId, int count, int cartId, OnCompleteListener<MessageBean> listener) {
+        if (FuLiCenterApplication.getMyCartList().containsKey(goodsId)) {
+            if (action == I.ACTION_CART_DEL) {
+                delCart(context, cartId, listener);
+            } else {
+                updateCart(context, cartId, count, listener);
+            }
+        } else {
+            addCart(context, username, goodsId, 1, listener);
+        }
     }
 }

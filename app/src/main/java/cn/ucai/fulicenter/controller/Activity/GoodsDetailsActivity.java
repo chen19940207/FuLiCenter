@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.controller.Activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
@@ -19,7 +20,9 @@ import cn.ucai.fulicenter.model.bean.AlbumsBean;
 import cn.ucai.fulicenter.model.bean.GoodsDetailsBean;
 import cn.ucai.fulicenter.model.bean.MessageBean;
 import cn.ucai.fulicenter.model.bean.User;
+import cn.ucai.fulicenter.model.net.IModeUser;
 import cn.ucai.fulicenter.model.net.ModelGoods;
+import cn.ucai.fulicenter.model.net.ModelUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.CommonUtils;
 import cn.ucai.fulicenter.model.utils.L;
@@ -67,6 +70,8 @@ public class GoodsDetailsActivity extends AppCompatActivity {
     RelativeLayout activityGoodsDetails;
 
     boolean isCollect;
+    IModeUser userModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +99,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                L.e(TAG,"error="+error);
+                L.e(TAG, "error=" + error);
             }
         });
     }
@@ -104,7 +109,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
         tvGoodNameEnglish.setText(result.getGoodsEnglishName());
         tvGoodPriceCurrent.setText(result.getCurrencyPrice());
         tvGoodPriceShop.setText(result.getShopPrice());
-        salv.startPlayLoop(indicator,getAlbumUrl(result),getAlbumCount(result));
+        salv.startPlayLoop(indicator, getAlbumUrl(result), getAlbumCount(result));
         wvGoodBrief.loadDataWithBaseURL(null, result.getGoodsBrief(), I.TEXT_HTML, I.UTF_8, null);
     }
 
@@ -120,7 +125,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
             AlbumsBean[] albums = result.getProperties()[0].getAlbums();
             if (albums != null && albums.length > 0) {
                 String[] urls = new String[albums.length];
-                for (int i=0;i<albums.length;i++) {
+                for (int i = 0; i < albums.length; i++) {
                     urls[i] = albums[i].getImgUrl();
                 }
                 return urls;
@@ -203,4 +208,25 @@ public class GoodsDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.iv_good_cart)
+    public void addCart() {
+        User user = FuLiCenterApplication.getUser();
+        userModel = new ModelUser();
+        userModel.updateCart(this, I.ACTION_CART_ADD, user.getMuserName(), goodsId, 1, 0, new OnCompleteListener<MessageBean>() {
+            @Override
+            public void onSuccess(MessageBean result) {
+                if (result != null && result.isSuccess()) {
+                  //  FuLiCenterApplication.getMyCartList().put(goodsId, null);
+                    CommonUtils.showLongToast(R.string.add_goods_success);
+
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
 }
+
