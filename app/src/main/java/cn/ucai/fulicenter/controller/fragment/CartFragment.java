@@ -33,6 +33,8 @@ import cn.ucai.fulicenter.model.net.ModelUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.CommonUtils;
 import cn.ucai.fulicenter.model.utils.ConvertUtils;
+import cn.ucai.fulicenter.model.utils.L;
+import cn.ucai.fulicenter.view.MFGT;
 import cn.ucai.fulicenter.view.SpaceItemDecoration;
 
 /**
@@ -60,6 +62,8 @@ public class CartFragment extends Fragment {
     @BindView(R.id.tvSavePrice)
     TextView tvSavePrice;
     UpdateCartReceiver mReceiver;
+    int sumPrice = 0;
+    int payPrice = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,6 +100,16 @@ public class CartFragment extends Fragment {
         initData(I.ACTION_DOWNLOAD);
     }
 
+    @OnClick(R.id.tv_cart_buy)
+    public void onBuyClick() {
+        if (sumPrice > 0) {
+            L.e("main","sumPrice"+sumPrice);
+            MFGT.gotoOrder(getActivity(), payPrice);
+        } else {
+            CommonUtils.showLongToast(R.string.order_nothing);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -103,7 +117,8 @@ public class CartFragment extends Fragment {
     }
 
     private void setPrice() {
-        int sumPrice = 0;
+        sumPrice = 0;
+        payPrice = 0;
         int savePrice = 0;
         if (cartList != null && cartList.size() > 0) {
             for (CartBean cart : cartList) {
@@ -117,6 +132,7 @@ public class CartFragment extends Fragment {
         tvCartSumPrice.setText("合计：￥" + sumPrice);
         tvSavePrice.setText("节省：￥" + savePrice);
         mAdapter.notifyDataSetChanged();
+        payPrice = sumPrice - savePrice;
     }
 
     int getPrice(String price) {
@@ -153,13 +169,17 @@ public class CartFragment extends Fragment {
                     mtvNoMore.setVisibility(View.GONE);
                     if (result != null && result.length > 0) {
                         ArrayList<CartBean> list = ConvertUtils.array2List(result);
+                        cartList.addAll(list);
                         if (action == I.ACTION_DOWNLOAD || action == I.ACTION_PULL_DOWN) {
                             mAdapter.initData(list);
-                            cartList.addAll(list);
+                            // cartList.addAll(list);
                         } else {
                             mAdapter.addData(list);
-                         //   cartList.add(list);
+                            //   cartList.add(list);
                         }
+                    } else {
+                        msrl.setVisibility(View.GONE);
+                        mtvNoMore.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -184,7 +204,7 @@ public class CartFragment extends Fragment {
         mrv.addItemDecoration(new SpaceItemDecoration(12));
         mrv.setLayoutManager(gm);
         mrv.setHasFixedSize(true);
-        mAdapter = new CartAdapter(getContext(), new ArrayList<CartBean>());
+        mAdapter = new CartAdapter(getContext(), cartList);
         mrv.setAdapter(mAdapter);
         mtvNoMore.setVisibility(View.VISIBLE);
     }

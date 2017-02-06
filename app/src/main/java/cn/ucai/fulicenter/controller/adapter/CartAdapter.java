@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.CartBean;
 import cn.ucai.fulicenter.model.bean.GoodsDetailsBean;
@@ -26,6 +27,7 @@ import cn.ucai.fulicenter.model.net.IModeUser;
 import cn.ucai.fulicenter.model.net.ModelUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
+import cn.ucai.fulicenter.model.utils.L;
 
 import static android.R.attr.action;
 
@@ -37,14 +39,13 @@ public class CartAdapter extends RecyclerView.Adapter {
     Context mContext;
     ArrayList<CartBean> mList;
     IModeUser model;
-    User user;
+ User user;
 
-    public CartAdapter(Context mContext, ArrayList<CartBean> mList) {
-        this.mContext = mContext;
-        this.mList = new ArrayList<>();
-        this.mList.addAll(mList);
+    public CartAdapter(Context context, ArrayList<CartBean> mList) {
+        mContext = context;
+        this.mList = mList;
         model = new ModelUser();
-        user = new User();
+        user = FuLiCenterApplication.getUser();
     }
 
     @Override
@@ -62,7 +63,7 @@ public class CartAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList != null ? mList.size() : 0;
     }
 
     public void initData(ArrayList<CartBean> list) {
@@ -138,13 +139,13 @@ public class CartAdapter extends RecyclerView.Adapter {
         @OnClick(R.id.ivReduceCart)
         public void delCart() {
             final int count = mList.get(listPosition).getCount();
-            int action = I.ACTION_CART_ADD;
+            int action = I.ACTION_CART_UPDATE;
             if (count > 1) {
                 action = I.ACTION_CART_UPDATE;
             } else {
                 action = I.ACTION_CART_DEL;
             }
-            model.updateCart(mContext, I.ACTION_CART_UPDATE, user.getMuserName(),
+            model.updateCart(mContext,action, user.getMuserName(),
                     mList.get(listPosition).getGoodsId(), count - 1, mList.get(listPosition).getId(),
                     new OnCompleteListener<MessageBean>() {
                         @Override

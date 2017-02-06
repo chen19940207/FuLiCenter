@@ -27,7 +27,8 @@
         <activity android:name=".controller.Activity.RegisterActivity" />
         <activity android:name=".controller.Activity.SettingsActivity" />
         <activity android:name=".controller.Activity.UpdateNickActivity" />
-        <activity android:name=".controller.Activity.CollectsActivity"></activity>
+        <activity android:name=".controller.Activity.CollectsActivity" />
+        <activity android:name=".controller.Activity.OrederActivity"></activity>
     </application>
 
 </manifest>
