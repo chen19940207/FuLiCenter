@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.layout_Cart:
                 if (FuLiCenterApplication.getUser() == null) {
-                    MFGT.gotoLogin(this);
+                    MFGT.gotoLogin(this, I.REQUEST_CODE_LOGIN_FROM_CART);
                 } else {
                     index = 3;
                 }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setFragment() {
-        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.hide(mFragment[currentIndex]);
         if (!mFragment[index].isAdded()) {
             ft.add(R.id.fragment_container, mFragment[index]);
@@ -143,8 +143,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == I.REQUEST_CODE_LOGIN) {
-            index = 4;
+        if (resultCode == RESULT_OK) {
+            if (requestCode == I.REQUEST_CODE_LOGIN) {
+                index = 4;
+            }
+            if (requestCode == I.REQUEST_CODE_LOGIN_FROM_CART) {
+                index = 3;
+            }
             setFragment();
             setRadioStatus();
         }

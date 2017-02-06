@@ -10,6 +10,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class PersonalFragment extends Fragment {
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_personal, container, false);
         ButterKnife.bind(this, layout);
-        //   initOrderList();
+        initOrderList();
         initData();
         return layout;
     }
@@ -87,18 +88,20 @@ public class PersonalFragment extends Fragment {
         oreder1.put("order", R.drawable.order_list1);
         data.add(oreder1);
         HashMap<String, Object> oreder2 = new HashMap<String, Object>();
-        oreder2.put("order", R.drawable.order_list1);
+        oreder2.put("order", R.drawable.order_list2);
         data.add(oreder2);
         HashMap<String, Object> oreder3 = new HashMap<String, Object>();
-        oreder3.put("order", R.drawable.order_list1);
+        oreder3.put("order", R.drawable.order_list3);
         data.add(oreder3);
         HashMap<String, Object> oreder4 = new HashMap<String, Object>();
-        oreder4.put("order", R.drawable.order_list1);
+        oreder4.put("order", R.drawable.order_list4);
         data.add(oreder4);
         HashMap<String, Object> oreder5 = new HashMap<String, Object>();
-        oreder5.put("order", R.drawable.order_list1);
+        oreder5.put("order", R.drawable.order_list5);
         data.add(oreder5);
-        //  SimpleAdapter adapter=new SimpleAdapter(getContext(),data,R.layout.)
+        SimpleAdapter adapter = new SimpleAdapter(getContext(), data, R.layout.simple_adapter,
+                new String[]{"order"}, new int[]{R.id.iv_order});
+        centerUserOrderLis.setAdapter(adapter);
     }
 
     private void initData() {
